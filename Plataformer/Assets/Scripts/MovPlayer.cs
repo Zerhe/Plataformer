@@ -7,6 +7,7 @@ public class MovPlayer : MonoBehaviour {
     private bool right;
     private bool left;
     private bool jump;
+    private bool coliPiso;
     private float vel;
     private float velJump;
 
@@ -16,7 +17,7 @@ public class MovPlayer : MonoBehaviour {
         left = false;
         jump = false;
         vel = 10;
-        velJump = 200;
+        velJump = 300;
 	}
 
     void FixedUpdate()
@@ -26,12 +27,32 @@ public class MovPlayer : MonoBehaviour {
         if (left)
             rgb.AddRelativeForce(Vector3.left * vel, ForceMode2D.Impulse);
         if (jump)
+        {
             rgb.AddRelativeForce(Vector3.up * velJump, ForceMode2D.Impulse);
+            jump = false;
+        }
     }
     void Update ()
     {
         right = Input.GetButton("Right");
         left = Input.GetButton("Left");
-        jump = Input.GetButtonDown("Jump");          
+        if (coliPiso)
+        {   
+            if (Input.GetButtonDown("Jump"))
+            {
+                jump = true;
+            }
+        }
 	}
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Plataforma")
+        {
+            coliPiso = true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        coliPiso = false;
+    }
 }
