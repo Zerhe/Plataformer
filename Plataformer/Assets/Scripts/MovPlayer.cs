@@ -34,10 +34,11 @@ public class MovPlayer : MonoBehaviour {
     }
     void Update ()
     {
-        right = Input.GetButton("Right");
-        left = Input.GetButton("Left");
+        
         if (coliPiso)
-        {   
+        {
+            right = Input.GetButton("Right");
+            left = Input.GetButton("Left");
             if (Input.GetButtonDown("Jump"))
             {
                 jump = true;
