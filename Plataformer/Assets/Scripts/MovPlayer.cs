@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovPlayer : MonoBehaviour {
     private Rigidbody2D rgb;
+    private SpriteRenderer sr;
     private bool right;
     private bool left;
     private bool jump;
@@ -13,6 +14,7 @@ public class MovPlayer : MonoBehaviour {
 
 	void Awake () {
         rgb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         right = false;
         left = false;
         jump = false;
@@ -23,9 +25,15 @@ public class MovPlayer : MonoBehaviour {
     void FixedUpdate()
     {
         if (right)
+        {
+            sr.flipX = false;
             rgb.AddRelativeForce(Vector3.right * vel, ForceMode2D.Impulse);
+        }
         if (left)
+        {
+            sr.flipX = true; ;
             rgb.AddRelativeForce(Vector3.left * vel, ForceMode2D.Impulse);
+        }
         if (jump)
         {
             rgb.AddRelativeForce(Vector3.up * velJump, ForceMode2D.Impulse);
