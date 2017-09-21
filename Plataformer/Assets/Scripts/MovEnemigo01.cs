@@ -7,10 +7,9 @@ public class MovEnemigo01 : MonoBehaviour {
     private Transform playerTransform;
     private float velMovInicial;
     private float velMov;
-    private float velGuard;
 
 	void Start () {
-        velMovInicial = 5;
+        velMovInicial = 8;
         velMov = velMovInicial;
 	}
 	
@@ -19,7 +18,7 @@ public class MovEnemigo01 : MonoBehaviour {
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Plataforma")
+        if (collision.gameObject.tag == "Plataforma" || collision.gameObject.tag == "Pared" || collision.gameObject.tag == "Enemigo01")
         {
             if (velMov > 0)
                 velMov = -velMovInicial;
@@ -29,15 +28,20 @@ public class MovEnemigo01 : MonoBehaviour {
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.name == "Player01")
         {
-            velGuard = velMov;
             velMov = 0;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-            velMov = velGuard;
+        if (collision.gameObject.name == "Player01")
+        {
+            int valor = Random.Range(0, 2);
+            if (valor == 0)
+                velMov = velMovInicial;
+            else if (valor == 1)
+                velMov = -velMovInicial;
+        }
     }
 }
