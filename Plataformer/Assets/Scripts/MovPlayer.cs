@@ -9,6 +9,7 @@ public class MovPlayer : MonoBehaviour {
     private bool left;
     private bool jump;
     private bool coliPiso;
+    [SerializeField]
     private float vel;
     private float velJump;
 
@@ -18,7 +19,6 @@ public class MovPlayer : MonoBehaviour {
         right = false;
         left = false;
         jump = false;
-        vel = 10;
         velJump = 300;
 	}
 
@@ -45,11 +45,23 @@ public class MovPlayer : MonoBehaviour {
         
         if (coliPiso)
         {
-            right = Input.GetButton("Right");
-            left = Input.GetButton("Left");
-            if (Input.GetButtonDown("Jump"))
+            if (name == "Player01")
             {
-                jump = true;
+                right = Input.GetButton("Player01Right");
+                left = Input.GetButton("Player01Left");
+                if (Input.GetButtonDown("Player01Jump"))
+                {
+                    jump = true;
+                }
+            }
+            else if (name == "Player02")
+            {
+                right = Input.GetButton("Player02Right");
+                left = Input.GetButton("Player02Left");
+                if (Input.GetButtonDown("Player02Jump"))
+                {        
+                    jump = true;
+                }
             }
         }
 	}

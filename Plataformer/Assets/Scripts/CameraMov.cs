@@ -5,21 +5,17 @@ using UnityEngine;
 public class CameraMov : MonoBehaviour {
     [SerializeField]
     private Transform playerTransform;
-    private Vector3 posInicial;
-    private Vector3 posFinal;
+    private Vector3 limiteIzq;
 
 	void Start () {
-        posInicial = transform.position;
-        posInicial.x = 0;
-        posFinal = transform.position;
-        posFinal.x = 75;
+
 	}
 	
 	void Update () {
         if (transform.position.x < 0)
-            transform.position = posInicial;
+            transform.position = new Vector3(0, transform.position.y, transform.position.z);
         if (transform.position.x > 75)
-            transform.position = posFinal;
+            transform.position = new Vector3(75, transform.position.y, transform.position.z);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -34,5 +30,9 @@ public class CameraMov : MonoBehaviour {
                 transform.Translate(Vector3.right * Time.deltaTime * -7);
             }
         }
+    }
+    public void CamaraUp()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y + 23, transform.position.z);
     }
 }

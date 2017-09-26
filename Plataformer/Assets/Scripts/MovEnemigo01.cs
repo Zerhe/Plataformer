@@ -16,6 +16,10 @@ public class MovEnemigo01 : MonoBehaviour {
 	void Update () {
         transform.Translate(Vector3.right * Time.deltaTime * velMov);
     }
+    public float GetVelMov()
+    {
+        return velMov;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Plataforma" || collision.gameObject.tag == "Pared" || collision.gameObject.tag == "Enemigo01")

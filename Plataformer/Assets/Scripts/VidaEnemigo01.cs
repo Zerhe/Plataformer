@@ -23,9 +23,16 @@ public class VidaEnemigo01 : MonoBehaviour {
 	}
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Disparo01")
+        if(collision.gameObject.tag == "PlayerDisparo01")
         {
             vida -= collision.gameObject.GetComponent<Disparo01Player01>().GetDanio();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Espada")
+        {
+            vida -= collision.gameObject.GetComponent<Espada>().GetDanio();
         }
     }
 }

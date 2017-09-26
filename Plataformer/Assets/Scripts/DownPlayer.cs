@@ -8,7 +8,6 @@ public class DownPlayer : MonoBehaviour {
     [SerializeField]
     private Sprite playerDown;
     private SpriteRenderer rendPlayer;
-    private Vector3 scaleDown;
 
     private void Awake()
     {
@@ -16,20 +15,17 @@ public class DownPlayer : MonoBehaviour {
     }
     void Start ()
     {
-        scaleDown = Vector3.one;
-        scaleDown.y = 0.5f;
+
 	}
 	
 	void Update ()
     {
-		if (Input.GetButton("Down"))
+		if (Input.GetButton("Player01Down"))
         {
-            transform.localScale = scaleDown;
             rendPlayer.sprite = playerDown;
         }
-        if (Input.GetButtonUp("Down"))
+        if (Input.GetButtonUp("Player01Down"))
         {
-            transform.localScale = Vector3.one;
             rendPlayer.sprite = playerIdle;
         }
     }
